@@ -1,3 +1,6 @@
+const path = require('path')
+const Todo = require(path.join(__dirname, '../../models/Todo')); 
+
 const createTodo = (req,res)=>{
 
     let { todo_name, todo_title, todo_desc } = req.body;

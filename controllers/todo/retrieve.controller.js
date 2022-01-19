@@ -1,3 +1,6 @@
+const path = require('path')
+const Todo = require(path.join(__dirname, '../../models/Todo')); 
+
 const retrieveAllTodos = (req,res)=>{
     Todo.findAll().then( (err,todos) =>{
         if(!err){

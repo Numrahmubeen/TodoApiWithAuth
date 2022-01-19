@@ -1,7 +1,7 @@
 const todoRoutes = require('./todo');
 
 const mountRoutes = (app) => {
-    app.use('/todo', todoRoutes);
+    app.use('/', todoRoutes);
 }
 
 module.exports = mountRoutes;

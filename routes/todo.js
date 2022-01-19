@@ -15,10 +15,10 @@ const { createTodo,
 
 router.post('/saveTodo', createTodo);
 
-router.post('/', retrieveAllTodos);
-router.post('/pending', retrievePendingTodos);
-router.post('/complete', retrieveCompleteTodos);
-router.post('/todos/:id', retrieveTodoById);
+router.get('/', retrieveAllTodos);
+router.get('/pending', retrievePendingTodos);
+router.get('/complete', retrieveCompleteTodos);
+router.get('/todos/:id', retrieveTodoById);
 router.post('/edit/:todo_id', updateTodo);
 
 
