@@ -15,7 +15,7 @@ const db = require("./config/database");
 
   //handle conversation to and from json
 const bodyParser = require("body-parser");
-const mountRoutes = require('./routes');
+const mountRoutes = require('./routes/index');
 app.use(bodyParser.json());
 
 // mount routes 
