@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-// const auth = require('../middleware/auth');
+const auth = require('../middleware/auth');
 // const validateAppVersion = require('../middleware/auth');
 const { createTodo,
     retrieveAllTodos,
@@ -13,13 +13,13 @@ const { createTodo,
 
 // router.post('/saveTodo', auth, validateAppVersion, createTodo);
 
-router.post('/saveTodo', createTodo);
+router.post('/saveTodo', auth, createTodo);
 
-router.get('/', retrieveAllTodos);
-router.get('/pending', retrievePendingTodos);
-router.get('/complete', retrieveCompleteTodos);
-router.get('/todos/:id', retrieveTodoById);
-router.post('/edit/:todo_id', updateTodo);
+router.get('/', auth,retrieveAllTodos);
+router.get('/pending', auth, retrievePendingTodos);
+router.get('/complete', auth, retrieveCompleteTodos);
+router.get('/todos/:id', auth, retrieveTodoById);
+router.post('/edit/:todo_id', auth, updateTodo);
 
 
 
