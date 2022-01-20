@@ -16,6 +16,6 @@ run npm start in cmd at the folder location and observe log to know about runnin
     todo_desc:"value",
   }
 - "http://localhost:4000/edit/:todo_id" will update todo_state to request that contain 
-  - { todo_state: "P"/"C" }
+  - { state: "P"/"C" }
  
 

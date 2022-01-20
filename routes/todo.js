@@ -21,6 +21,4 @@ router.get('/complete', auth, retrieveCompleteTodos);
 router.get('/todos/:id', auth, retrieveTodoById);
 router.post('/edit/:todo_id', auth, updateTodo);
 
-
-
 module.exports = router;
