@@ -10,6 +10,7 @@ const {
 // router.post('/saveTodo', auth, validateAppVersion, createTodo);
 
 router.post('/signup', signup);
-router.post('/login', siginUser);
+router.post('/login', siginUser
+);
 
 module.exports = router;

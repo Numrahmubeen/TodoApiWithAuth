@@ -23,9 +23,8 @@ const login = (req, res) => {
     return res.status(status.bad).send(errorMessage);
   }
   User.findOne({
-    where: {
-        email: email,
-    }
+    email: email
+    
 }).then(user => {
   if(!user){
     errorMessage.error = 'User with this email does not exist';
@@ -47,3 +46,5 @@ const login = (req, res) => {
 })};
 
 module.exports = login;
+// "email": "test@gmail.com",
+//         "password": "test123"

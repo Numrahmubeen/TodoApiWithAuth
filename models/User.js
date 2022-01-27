@@ -1,30 +1,26 @@
-const sequelize = require('sequelize');
-const db = require("../config/database");
-const User = db.define('Users', {
-  // Model attributes are defined here
-  id: {
-    type: sequelize.DataTypes.INTEGER,
-            primaryKey: true,
-            autoIncrement: true,
-  },
+const mongoose = require('mongoose');
+const Todos = mongoose.model('Todos');
+//Define a schema
+const Schema = mongoose.Schema;
+const UserSchema = new Schema({
   name: {
-    type: sequelize.DataTypes.STRING,
-    allowNull: false
+    type: String,
+    required: true,
   },
   email: {
-    type: sequelize.DataTypes.STRING,
-    allowNull: false,
-    unique : true
+    type: String,
+    required: true,
+    unique:true
   },
   password: {
-    type: sequelize.DataTypes.STRING,
-    allowNull: false
+    type: String,
+    required: true,
   },
-  created_on: {
-    type: sequelize.DataTypes.DATE,
-    allowNull: false
-  }
-}, {
-  timestamps: false
+  Todos: [Todos.schema]
 });
-module.exports = User;
+// hash user password before saving into database
+// UserSchema.pre('save', function(next){
+// this.password = bcrypt.hashSync(this.password, saltRounds);
+// next();
+// });
+module.exports = mongoose.model('Users', UserSchema);

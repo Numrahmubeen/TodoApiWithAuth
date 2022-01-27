@@ -1,4 +1,4 @@
-const moment = require('moment');
+// const moment = require('moment');
 const path = require('path')
 
 const {
@@ -18,7 +18,6 @@ const signup =  async (req, res) => {
       email, name, password,
     } = req.body;
   
-    const created_on = moment(new Date());
     if (isEmpty(email) || isEmpty(name) || isEmpty(password)) {
       errorMessage.error = 'Email, password and name field cannot be empty';
       return res.status(status.bad).send(errorMessage);
@@ -36,8 +35,7 @@ const signup =  async (req, res) => {
       User.create({
         name: name, 
         email: email,
-        password: password,
-        created_on: created_on
+        password: password
       }
         )
         .then((response,err)=>{
@@ -50,7 +48,7 @@ const signup =  async (req, res) => {
               //res.send('User Sucessfully created')
           }
           else{ 
-            if (error.routine === '_bt_check_unique') {
+            if (err === '_bt_check_unique') {
               errorMessage.error = 'User with that EMAIL already exist';
               return res.status(status.conflict).send(errorMessage);
             }
@@ -61,11 +59,21 @@ const signup =  async (req, res) => {
             // console.log(err.message) 
           }
         })
+        .catch((error)=> {
+         // res.send(error)
+          if (error.code == 11000) {   //11000 E11000 duplicate key error check
+            errorMessage.error = 'User with that EMAIL already exist';
+            return res.status(status.conflict).send(errorMessage);
+          }
+          errorMessage.error = 'Operation was not successful';
+          return res.status(status.error).send(errorMessage);
+        }
       // const { rows } = await dbQuery.query(createUserQuery, values);
       // const dbResponse = rows[0];
       // delete dbResponse.password;
-     
+        )
     } catch (error) {
+      res.send(error)
       if (error.routine === '_bt_check_unique') {
         errorMessage.error = 'User with that EMAIL already exist';
         return res.status(status.conflict).send(errorMessage);

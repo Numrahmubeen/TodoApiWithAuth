@@ -4,25 +4,15 @@ const Todo = require(path.join(__dirname, '../../models/Todo'));
 const updateTodo =(req,res)=>{
 
     let state = req.body.state;
-    // if(state == "C"){
-    //   state = "P";
-    // }else{
-    //   state = "C";
-    // }
 
-    Todo.update({ todo_state: state }, {
-        where: {
-            todo_id: req.params.todo_id
-        }
-      })
-      .then((response,err)=>{
-        if(!err){
-          res.send("Todo state updated sucessfully! of id: "+req.params.todo_id +" "+ state)
-        }
-        else{ 
+      Todo.findOneAndUpdate({
+        _id: req.params.todo_id,
+      } , {todo_state: state})
+      .then((todo)=>{
+        res.send("Todo state updated successfully "+req.params.todo_id)
+      }).catch( (err)=> {
+        console.log(err)
           res.send(err)
-          console.log(err.message) 
-        }
-      });
+      })
   }
 module.exports = updateTodo;

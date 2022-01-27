@@ -11,7 +11,9 @@ app.use(express.urlencoded({extended:true}));
 
   //db config info 
 
-const db = require("./config/database");
+const mongoose = require("./config/database");
+// connection to mongodb
+mongoose.connection.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
   //handle conversation to and from json
 const bodyParser = require("body-parser");
