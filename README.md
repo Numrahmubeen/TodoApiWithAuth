@@ -1,6 +1,6 @@
 <h1>TodoApi</h1>
 <h3>About: </h3>
-Simple API Endpoints implemented with node.js, express, sequelize and postgres DB
+Simple API Endpoints implemented with node.js, express, mongoose and MongoDB
 <h3> Use: </h3>
 run npm start in cmd at the folder location and observe log to know about running Port
 # app.js file contains all of the routes
