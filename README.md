@@ -5,8 +5,6 @@ Simple API Endpoints implemented with node.js, GraphQl, mongoose and MongoDB
 run npm start in cmd at the folder location and observe log to know about running Port
 # graphql>mutation.js & queries.js files contain all of the mutatation and queries respectively
 
-- "http://localhost:4000/auth/signup" with ( email, name, password) from the request will register new user
-- "http://localhost:4000/auth/login" with ( email, password) from the request will login and send token and user info
 -That token will be send for following request inside header
 
     - mutation{
@@ -45,7 +43,7 @@ run npm start in cmd at the folder location and observe log to know about runnin
           }
         -PendingTodos{//}
         -CompleteTodos{//}
-        
+
         
     }
 }
