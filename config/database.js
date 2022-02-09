@@ -1,5 +1,5 @@
   const mongoose = require('mongoose');
-  const url = "mongodb://localhost/todoApi";
+  const url = "mongodb://localhost/todoApiGraphQl";
   mongoose.connect(url,{
       useNewUrlParser: true,
       useFindAndModify: false,

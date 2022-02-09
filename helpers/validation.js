@@ -29,15 +29,11 @@ const isValidEmail = (email) => {
     }
   };
 
-  const generateUserToken = (email,id,is_admin,name)=>{
+  const generateUserToken = (id)=>{
       const token = jwt.sign({
-          email,
-          user_id: id,
-          is_admin,
-          name,
-        },
-        env
-        ,{expiresIn: "2d"});
+          user: id,
+        },"secret",
+        {expiresIn: "2d"});
         return token;
   };
   

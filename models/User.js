@@ -1,8 +1,7 @@
+const { UniqueArgumentDefinitionNamesRule } = require('graphql');
 const mongoose = require('mongoose');
-const Todos = mongoose.model('Todos');
 //Define a schema
-const Schema = mongoose.Schema;
-const UserSchema = new Schema({
+const UserSchema = mongoose.Schema({
   name: {
     type: String,
     required: true,
@@ -15,12 +14,41 @@ const UserSchema = new Schema({
   password: {
     type: String,
     required: true,
-  },
-  Todos: [Todos.schema]
+  }
 });
 // hash user password before saving into database
 // UserSchema.pre('save', function(next){
 // this.password = bcrypt.hashSync(this.password, saltRounds);
 // next();
 // });
-module.exports = mongoose.model('Users', UserSchema);
+
+const User = mongoose.model('Users', UserSchema);
+
+module.exports.createUser = function (name,email,password) {
+
+  const myNewUser =new User({  name:name,email:email,password:password});
+  myNewUser.save();
+  return myNewUser;
+}
+
+module.exports.findById = function(id){
+  const user = User.findOne({
+     _id: id
+     })
+     return user;
+}
+
+
+module.exports.findOne = function(email){
+   const user = User.findOne({
+      email: email
+      })
+      return user;
+}
+
+module.exports.find = function(){
+  const users = User.find()
+  return users;
+}
+
+

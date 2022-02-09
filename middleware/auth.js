@@ -11,26 +11,42 @@ const {
 
 dotenv.config;
 
-const verifyToken = async (req, res, next) => {
-  const { token } = req.headers;
-  if (!token) {
-    errorMessage.error = 'Token not provided';
-    return res.status(status.bad).send(errorMessage);
-  }
-  try {
-    const decoded =  jwt.verify(token, env);
-    req.user = {
-      email: decoded.email,
-      user_id: decoded.user_id,
-      is_admin: decoded.is_admin,
-      name: decoded.name,
-    };
-    next();
-  } catch (error) {
-    errorMessage.error = 'Authentication Failed';
-    console.log(error);
-    return res.status(status.unauthorized).send(errorMessage);
-  }
-};
+// const verifyToken = async (req, res, next) => {
+//   const { token } = req.headers;
+//   if (!token) {
+//     errorMessage.error = 'Token not provided';
+//     return res.status(status.bad).send(errorMessage);
+//   }
+//   try {
+//     const decoded =  jwt.verify(token, env);
+//     req.user = {
+//       email: decoded.email,
+//       user_id: decoded.user_id,
+//       is_admin: decoded.is_admin,
+//       name: decoded.name,
+//     };
+//     next();
+//   } catch (error) {
+//     errorMessage.error = 'Authentication Failed';
+//     console.log(error);
+//     return res.status(status.unauthorized).send(errorMessage);
+//   }
+// };
 
-module.exports = verifyToken;
+const authenticate = async (req, res, next) => {
+  const token = req.headers.token;
+
+  try {
+    
+    const verified = jwt.verify(token,"secret")
+    // const decoded = jwt.decode(token, process.env.JWT_SECRET)
+    req.user = verified.user
+    console.log("Verification success!", verified)
+    next()
+  } catch (err) {
+    console.log("Verification failed!", err)
+    next()
+  }
+}
+
+module.exports = { authenticate }
