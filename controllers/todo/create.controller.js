@@ -7,7 +7,7 @@ const Todo = require(path.join(__dirname, '../../models/Todo'));
 const createTodo = (req,res)=>{
 
     let { name, title, desc } = req.body;
-    let userId = req.params.userId;
+    let userId = req.user.user_id;
     console.log(" name, title, desc"+ name+ title+ desc )
     Todo.create(
       { 

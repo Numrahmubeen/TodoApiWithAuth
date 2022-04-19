@@ -35,6 +35,7 @@ const login = (req, res) => {
     return res.status(status.bad).send(errorMessage);
   }
   const token = generateUserToken(user.email, user.id, false, user.name);
+  user.delete("password");
   successMessage.data = user;
   successMessage.token = token;
   return res.status(status.success).send(successMessage);

@@ -4,7 +4,7 @@ const bodyparser = require('body-parser');
 const Todo = require("./models/Todo");
 
 const app = express();
-const port = 4000;
+const port = 5000;
 
 //enable form post variables : a config change
 app.use(express.urlencoded({extended:true}));
@@ -14,11 +14,13 @@ app.use(express.urlencoded({extended:true}));
 const mongoose = require("./config/database");
 // connection to mongodb
 mongoose.connection.on('error', console.error.bind(console, 'MongoDB connection error:'));
+app.use(express.json({
+  type: ['application/json', 'text/plain']
+}));
 
-  //handle conversation to and from json
-const bodyParser = require("body-parser");
 const mountRoutes = require('./routes/index');
-app.use(bodyParser.json());
+
+
 
 // mount routes 
 mountRoutes(app);

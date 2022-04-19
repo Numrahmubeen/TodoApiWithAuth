@@ -7,7 +7,7 @@ const {
 const retrieveAllTodos = (req,res)=>{
 try {
   Todo.find({
-    user_id: req.params.userId
+    user_id:  req.user.user_id
     
 }).then(todos =>{
   if(!todos){
@@ -32,7 +32,7 @@ try {
 const retrievePendingTodos = (req,res)=>{
   try {
     Todo.find({
-      user_id: req.params.userId,
+      user_id: req.user.user_id,
         todo_state: "P",
       
     }).then(todos =>{
@@ -56,7 +56,7 @@ const retrievePendingTodos = (req,res)=>{
 const retrieveCompleteTodos = (req,res)=>{
 
   Todo.find({
-    user_id: req.params.userId,
+    user_id: req.user.user_id,
       todo_state: "C",
     
   }).then(todos =>{
@@ -76,7 +76,7 @@ const retrieveCompleteTodos = (req,res)=>{
 const retrieveTodoById = (req,res)=>{
 
   Todo.find({
-    user_id: req.params.userId,
+    user_id: req.user.user_id,
     _id: req.params.id,
   }).then(todos =>{
   //  res.send(req.params.id+"user id "+req.params.userId)
